@@ -7,7 +7,7 @@ module.exports = class Emprestimo {
         this.valorEmprestimo = valorEmprestimo
         this.qtdParcelas = []
         for(let i = 1; i <= qtdParcelas; i++) {
-            this.qtdParcelas.push(new Parcelamento((valorEmprestimo * Emprestimo.#taxaJuros) / qtdParcelas), i)
+            this.qtdParcelas.push(new Parcelamento((valorEmprestimo * Emprestimo.#taxaJuros) / qtdParcelas, i))
         }
         this.dataCriacao = new Date()
     }
