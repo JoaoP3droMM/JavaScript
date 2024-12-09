@@ -1,24 +1,24 @@
-module.exports = class Emprestimo {
-    #taxaJuros
+const Parcelamento = require("./Parcelamento")
 
-    constructor(valorEmprestimo, dataCriacao, parcelas, numParcelas = 0) {
+module.exports = class Emprestimo {
+    static #taxaJuros = 1.05
+
+    constructor(valorEmprestimo, qtdParcelas) {
         this.valorEmprestimo = valorEmprestimo
-        this.dataCriacao = dataCriacao
-        this.parcelas = parcelas
-        this.numParcelas = numParcelas
-        this.#taxaJuros = 0
+        this.qtdParcelas = []
+        for(let i = 1; i <= qtdParcelas; i++) {
+            this.qtdParcelas.push(new Parcelamento((valorEmprestimo * Emprestimo.#taxaJuros) / qtdParcelas), i)
+        }
+        this.dataCriacao = new Date()
     }
 
     get taxaJuros() {
-        return this.#taxaJuros
+        return Emprestimo.#taxaJuros
     }
 
-    set novaTaxaDeJuros(porcentagem) {
-        this.#taxaJuros += (this.#taxaJuros * (porcentagem / 100))
+    static set novaTaxaDeJuros(porcentagem) {
+        Emprestimo.#taxaJuros = 1 + (porcentagem / 100)
+        // this.#taxaJuros += (this.#taxaJuros * (porcentagem / 100))
         // this.taxa *= ((100 + porcentagem) / 100)
-    }
-
-    calcParcelas(numParcelas) {
-        
     }
 }

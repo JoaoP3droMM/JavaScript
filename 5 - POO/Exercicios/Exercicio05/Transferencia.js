@@ -1,8 +1,8 @@
 module.exports = class Transferencia {
-    constructor(usuarioEnviou, usuarioRecebeu, valor, dataCriacao) {
+    constructor(usuarioEnviou, usuarioRecebeu, valor) {
         this.usuarioEnviou = usuarioEnviou
         this.usuarioRecebeu = usuarioRecebeu
         this.valor = valor
-        this.dataCriacao = dataCriacao
+        this.dataCriacao = new Date()
     }
 }
